@@ -1,3 +1,9 @@
+/**
+ * @author Sergey Kuznetsov
+ * Innopolis University
+ * Summer School 2015
+ */
+
 package Snake;
 
 import java.awt.Color;
@@ -5,6 +11,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.Map;
+
 import javax.swing.JPanel;
 
 /** Displays a window and delegates drawing to DrawGraphics. */
@@ -12,12 +20,16 @@ public class Render extends JPanel implements Runnable {
     private static final long serialVersionUID = -7469734580960165754L;
     private boolean animate = true;
     public static final int FRAME_DELAY = 250; // 50 ms = 20 FPS
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 600;
+//    public static final int WIDTH = 600;
+//    public static final int HEIGHT = 600;
     private Canvas draw;
 
-    public Render(Canvas drawer) {
+	private LeaderBoard leader_board;
+	private boolean isVisibleLeaderBoard = false;
+
+    public Render(Canvas drawer, int leader_board_size) {
         this.draw = drawer;
+		leader_board = new LeaderBoard(0, 0, leader_board_size);
     }
     
     public Canvas getCanvas() {
@@ -31,6 +43,8 @@ public class Render extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         draw.draw(g2);
+        if(isVisibleLeaderBoard)
+        	leader_board.draw(g2);
     }
 
     /** Enables periodic repaint calls. */
@@ -45,6 +59,12 @@ public class Render extends JPanel implements Runnable {
 
     private synchronized boolean animationEnabled() {
         return animate;
+    }
+    
+    public void drawLeaderBoard(Map<String,Integer> src){
+    	isVisibleLeaderBoard = true;
+    	leader_board.setStrings(src);
+    	repaint();
     }
 
     public void run() {

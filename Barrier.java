@@ -1,3 +1,9 @@
+/**
+ * @author Sergey Kuznetsov
+ * Innopolis University
+ * Summer School 2015
+ */
+
 package Snake;
 
 import java.awt.Color;

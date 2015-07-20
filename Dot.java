@@ -1,3 +1,9 @@
+/**
+ * @author Sergey Kuznetsov
+ * Innopolis University
+ * Summer School 2015
+ */
+
 package Snake;
 
 import java.awt.BasicStroke;
@@ -10,8 +16,6 @@ public class Dot {
     private int y;
     protected Color color = Color.BLACK;
     public final static int DOT_SIZE = 20;
-    
-    enum Type{SNAKE_BODY,BOARD,BOMBOM};
 
     /**
      * Initialize a new box with its center located at (startX, startY), filled * with startColor.
@@ -25,10 +29,10 @@ public class Dot {
     public void draw(Graphics surface) {
         // Draw the object
         surface.setColor(color);
-        surface.fillRect(x - DOT_SIZE / 2, y - DOT_SIZE / 2, DOT_SIZE, DOT_SIZE);
+        surface.fillRect(x, y, DOT_SIZE, DOT_SIZE);
         surface.setColor(Color.BLACK);
         ((Graphics2D) surface).setStroke(new BasicStroke(2.0f));
-        surface.drawRect(x - DOT_SIZE / 2, y - DOT_SIZE / 2, DOT_SIZE, DOT_SIZE);
+        surface.drawRect(x, y, DOT_SIZE, DOT_SIZE);
     }
     
     public int getPosX(){
